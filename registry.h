@@ -23,7 +23,7 @@ struct reg_value reg_read(void) {
     uint8_t *tmp = NULL;
     struct reg_value val = { 0 };
 
-    result = RegOpenKeyExW(HKEY_LOCAL_MACHINE, ProductPolicy, 0, KEY_QUERY_VALUE | KEY_WOW64_64KEY, &key);
+    result = RegOpenKeyExW(HKEY_LOCAL_MACHINE, ProductPolicy, 0, KEY_QUERY_VALUE, &key);
     if (result != ERROR_SUCCESS) {
         val.status = result;
         goto cleanup;
