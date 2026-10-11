@@ -63,7 +63,7 @@ cleanup:
     return val;
 }
 
-static const char *type_name(uint16_t type) {
+const char *type_name(uint16_t type) {
     switch (type) {
         case 0:  return "UNKNOWN_0";
         case 1:  return "REG_SZ";
@@ -80,7 +80,7 @@ static const char *type_name(uint16_t type) {
     }
 }
 
-static void print_value(const uint8_t *data, size_t data_len, uint16_t type) {
+void print_value(const uint8_t *data, size_t data_len, uint16_t type) {
     switch (type) {
         case 1:
             if (looks_like_utf16_name(data, data_len)) {
@@ -181,7 +181,7 @@ typedef struct {
 
 #pragma pack(pop)
 
-static int dump_record(const uint8_t *buf, size_t buf_size, size_t ofs, size_t *next_ofs) {
+int dump_record(const uint8_t *buf, size_t buf_size, size_t ofs, size_t *next_ofs) {
     if (ofs + sizeof(ENTRY) > buf_size)
         return 0;
     

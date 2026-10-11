@@ -17,7 +17,7 @@
 #define space "    "
 
 #define add(fmt, ...) fprintf(stdout, fmt, ##__VA_ARGS__)
-static void hexdump(const uint8_t *p, size_t n, const char *prefix) {
+void hexdump(const uint8_t *p, size_t n, const char *prefix) {
     for (size_t i = 0; i < n; i+= 16) {
         add("%s%08llX  ", prefix, i);
         size_t m = (n - i < 16) ? n - i : 16;
@@ -39,7 +39,7 @@ static void hexdump(const uint8_t *p, size_t n, const char *prefix) {
     }
 }
 
-static char *utf16le_to_utf8(const uint8_t *p, size_t bytes, size_t *out_len) {
+char *utf16le_to_utf8(const uint8_t *p, size_t bytes, size_t *out_len) {
     if (!p || bytes == 0 || (bytes % 2) != 0)
         return NULL;
     
@@ -74,7 +74,7 @@ static char *utf16le_to_utf8(const uint8_t *p, size_t bytes, size_t *out_len) {
     return out;
 }
 
-static int looks_like_utf16_name(const uint8_t *p, size_t bytes) {
+int looks_like_utf16_name(const uint8_t *p, size_t bytes) {
     if (bytes < 2 || (bytes % 2))
         return 0;
     
